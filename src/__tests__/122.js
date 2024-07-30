@@ -31,15 +31,22 @@ import userEvent from "@testing-library/user-event";
 //   }
 // })
 
-test("on change",()=>{
-  // const user = userEvent.setup()
-  const {container,debug} = render(<App />);
-  let el =screen.getByRole("textbox")
-  fireEvent.change(el,{target:{value:"ricdkys"}})
-  expect(el.value).toBe("rickys")
-  // console.log(prettyDOM(container))
-  // eslint-disable-next-line testing-library/no-debugging-utils
-  // debug()
-  logRoles(container)
+// test("on change",()=>{
+//   // const user = userEvent.setup()
+//   const {container,debug} = render(<App />);
+//   let el =screen.getByRole("textbox")
+//   fireEvent.change(el,{target:{value:"ricdkys"}})
+//   expect(el.value).toBe("rickys")
+//   // console.log(prettyDOM(container))
+//   // eslint-disable-next-line testing-library/no-debugging-utils
+//   // debug()
+//   logRoles(container)
 
+// })
+
+test("check api",async()=>{
+ const {container,debug}= render(<App/>)
+  const el = await screen.findAllByRole("listitem")
+  expect(el).toHaveLength(4)
+// debug()
 })

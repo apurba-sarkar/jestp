@@ -1,12 +1,21 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [data, setData] = useState("");
-  const handleData=()=>{
-    setData("hello")
-  }
+  const handleData = () => {
+    setData("hello");
+  };
+  const getData = async () => {
+    const result = await fetch("https://jsonplaceholder.typicode.com/todos");
+    const datas = await result.json();
+    setData(datas);
+    console.log(datas);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
@@ -20,19 +29,30 @@ function App() {
           onChange={(e) => setData(e.target.value)}
           value={data}
         />
-        <h1>sdsd</h1>
-        <button 
-        disabled
-        // data-testid='btn1' 
-        onClick={handleData}>hello
-        </button >
+        a<h1>sdsd</h1>
+        <button
+          disabled
+          // data-testid='btn1'
+          onClick={handleData}
+        >
+          hello
+        </button>
         {/* <button onClick={()=>setData("")}>reset
         </button > */}
-        <div>{data}</div>
+        {/* <div>{data}</div> */}
         {/* <button>dsd</button> */}
+        <ul>
+
+        {data && data.map((e) => {
+          return(
+            
+            <li key={e.id}>{e.title}</li>
+          )
+        })}
+        </ul>
       </header>
     </div>
   );
 }
- 
+
 export default App;
